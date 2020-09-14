@@ -1,19 +1,31 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { postParticipants } from '../services/AxiosApi'
+import { useHistory } from 'react-router-dom'
 
 function Registration () {
-    const { register, handleSubmit, watch, errors } = useForm()
-    const onSubmit = data => console.log(data)
+    const { register, handleSubmit } = useForm()
+    const history = useHistory()
 
-    console.log(watch('example'))
+    const onSubmit = (data) => {
+        postParticipants(data)
+        .then((response) => {
+            if (response.status === 201) {
+                console.log(response.data)
+                history.push('/RegistrationNotice')
+            }
+        })
+    }
 
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input name='name' ref={register({required: true})} placeholder='Nama' />
-                <input name='job' ref={register({required: true})} placeholder='Pekerjaan' />
-                <input name='whatsapp' ref={register({required: true})} placeholder='' />
-                <input name='email' ref={register({required: true})} />
+                Nama : <input name='name' ref={register} placeholder='Nama' /> <br />
+                Kampus : <input name='campus' ref={register} placeholder='Kampus' /> <br />
+                Angkatan : <input name='generation' ref={register} placeholder='Angkatan' /> <br />
+                Fakultas : <input name='faculty' ref={register} placeholder='Fakultas' /> <br />
+                WhatsApp<input name='whatsapp' ref={register} placeholder='No WhatsApp' /> <br />
+                Email <input name='email' ref={register} placeholder='Email' /> <br />
                 <input type='submit' />
             </form>
         </div>
