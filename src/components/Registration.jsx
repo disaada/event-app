@@ -11,7 +11,6 @@ function Registration () {
         postParticipants(data)
         .then((response) => {
             if (response.status === 201) {
-                console.log(response.data)
                 history.push('/RegistrationNotice')
             }
         })
