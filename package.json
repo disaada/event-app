@@ -25,7 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "backend": "json-server --watch backend/db.json"  
+    "backend": "json-server --watch backend/db.json",
+    "log": "heroku logs -a=gokopertis --tail"
   },
   "eslintConfig": {
     "extends": "react-app"
